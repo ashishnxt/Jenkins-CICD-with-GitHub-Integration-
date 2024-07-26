@@ -30,10 +30,10 @@ pipeline {
                 }
             }
         }
-        stage("deploy"){
+           stage("Deploy using Docker compose"){
             steps{
                 sh "docker-compose up -d"
-                echo 'deployment ho gayi'
+                echo 'hogya '
             }
         }
     }
