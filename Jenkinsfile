@@ -1,45 +1,25 @@
 pipeline {
-agent any
-environment {
-SONAR_PIPE = tool "sonar"
-}
-stages {
-   stage("code") {   
-        steps {    
-            echo "this is awesome"
-            
+    agent any
+    
+    stages {
+        
+        stage("code"){
+            steps{
+                git url: "https://github.com/ashishnxt/Jenkins-CICD-with-GitHub-Integration-.git", branch: "main"
+                echo 'bhaiyya code clone ho gaya'
+            }
         }
+        stage("build and test"){
+            steps{
+                sh "docker build -t node-app-test-new ."
+                echo 'code build bhi ho gaya'
+            }
+        }
+        stage("scan image"){
+            steps{
+                echo 'image scanning ho gayi'
+            }
+        }
+       
     }
-    stage("test") {
-        steps {
-            
-                echo "this is also awesome"
-                // Add more test-related steps here
-         
-        }
-    }
-    stage("build") {
-        steps {
-          
-                echo "building..."
-                // Add build-related steps here
-          
-        }
-    }
-    stage("scan") {
-        steps {
-           
-                echo "scanning..."
-                // Add scan-related steps here
-            
-        }
-    }
-    stage("deploy") {
-        steps {  
-          
-                echo "deploying..."
-                // Add deployment-related steps here
-        }
-     }
-  }
 }
